@@ -27,3 +27,18 @@ abb 5 folder create karenn gey
 4- models 
 5- routes 
 6- utills ye shortcut hy utilities ka jbb ham kaam karen gy to hameen bht sari utility lageey gy like file upload mailing and token lena etc jbb bhi kisi ko cahhey ho gi wo idghr sey ley ley ga 
+
+nodemon bht zeyada intersiting chz hy isi trah ka 1 or plugin hota hy jo ky prettier hy is ley team ko same page pr rakhney key ley ham prettier ko install karen gy  so isi ley is s ko insta;ll karen gy and is ki setting bhi krni hoti hy jo ky imp hy
+
+jb prettier install ho jaeey to kuxh filess ka setup krna partaa hy
+
+file name jo bnani hy .prettierrc
+{
+    "singleQuote": false,
+    "bracketSpacing": true,
+    "tabWidth": 2,
+    "semi": true,
+    "trailingComma": "es5"
+} 
+
+1 or bnai hy jo ky .prettierignore 

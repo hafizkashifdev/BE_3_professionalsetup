@@ -1,0 +1,9 @@
+/.vcode
+**/.git
+**/.svn
+**/.hg
+*.env
+.env
+.env.*
+./dist
+/node_modules
