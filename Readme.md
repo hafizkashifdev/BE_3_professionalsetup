@@ -1,4 +1,6 @@
 chai or backend 
+
+lacture 7 
 professional setup
 
 create public folder create temp file create .gitkeep
@@ -49,4 +51,71 @@ or ye add krna hy
 /node_modules
 
 
+// Lacture 8    How to connect database in MERN with debugging 
 
+go to mongoDB Atlas 
+
+Account bnana hy 
+
+new project bnana hy project owner 
+free wala data base chose krna hy 
+ip adreess set krna hota hy 
+
+.env mn apni db string rakhni hy 
+us ky bad constant mn apni db ko name dena hy 
+
+us key bad dotenv mongoose express install krny hen 
+
+
+
+sab sey pehley mongoose ko i krna hy  karen grey q  ky ye hi hy jo db ko connect krta hy
+
+kahanii 
+
+jab bhi db connect krna hy hy to try catch mn rap krna parta hy 
+data base is always in another 
+jb bhi bat kro gy because time lagta hy so aysnc await lagana hy and try catch mn wrap krna hy 
+then iffi consept ko use krna hy (async()={
+    try{
+       
+    }
+     catch{
+            
+        }
+})()
+effi ko start krny sey pehley ; laga dia jata hy to ye ; laga dia jata hy ye srf cleaing ky use kisa jata hy 
+
+
+ye bnaeen gy import mongoose from "mongoose";
+import { DB_NAME } from "./constants";
+
+(async()=>{
+    try{
+await mongoose.connect(`${process.env.MONGODB_URI}/${DB_NAME}`
+
+)
+app.on("error"),(error)=>{
+    console.log(error,"error ");
+throw error
+}
+app.listen(process.env.PORT,()=>{
+    console.log(`App is listing on Port ${process.env.PORT}`);
+})}
+    catch(error){
+console.log(error,"error ");
+throw error
+    }
+})()
+
+
+then next aproach use kareen gy
+ham alag sey file len gy db folder mn waha connection bnaeen and firh ussey index file mn import kr den gy 
+db ky ander jaeen gy 
+exist 1 or exit 0 ko read krna hy 
+
+connectionInstanse host krna hy taqey pta rahhy agr galti sey kisi or host oppy cahla gia to pta rahyy ky kaha gey hen
+
+important bat for dot env
+as early as possible in your application , import and configure dotenv
+
+q key hamm cahtty h en ky hamarey envirnoment variable sab sey pehleey load ho jaeen
