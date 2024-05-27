@@ -1,11 +1,6 @@
 chai or backend 
 professional setup
 
-
-///
-
-
-
 create public folder create temp file create .gitkeep
 
 create .git ignore file  go to git ignore genatorator onlin ecopy node js
@@ -42,3 +37,16 @@ file name jo bnani hy .prettierrc
 } 
 
 1 or bnai hy jo ky .prettierignore 
+or ye add krna hy 
+/.vcode
+**/.git
+**/.svn
+**/.hg
+*.env
+.env
+.env.*
+./dist
+/node_modules
+
+
+
