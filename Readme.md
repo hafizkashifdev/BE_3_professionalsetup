@@ -172,4 +172,18 @@ is trqah ky ye error code or resppose code hoty hen jo ky set hen ya krny hoty h
 
 is ky bad haam middlewears bnaeen gy
 
+Lacture 10 
+User and video model with hooks and JWT
+
+ham model bnaeen gy or us ky bad 1 package usee karen gy jo ky agreagation query use krny key ley  npm install mongoose-aggregate-paginate-v2
+ ye plugin ki trah inject hota hy 
+ 1 or bcrypt js  ye nod eki library hy it help to hash password malab encrypt and decrypt
+ baqi 1 or hy jwt jo ky json web token hoty hen 
+
+ bcrypt or jwt ki dirct incrption possible ni hy so is lwy hameen mongose kiy kuxh hook ki help leni parti hy 
+ like pre  ye 1 middleweare hy jo ye krta hy ky jessey hi koi data save honey ja raha ho us se pehley pass incript kr do 
+
+
+jwt 1 bareer token hy mean jo us ko data bejhta hy ye us ko data bejh data hy 
+
 
