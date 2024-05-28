@@ -119,3 +119,57 @@ important bat for dot env
 as early as possible in your application , import and configure dotenv
 
 q key hamm cahtty h en ky hamarey envirnoment variable sab sey pehleey load ho jaeen
+
+
+lacture No  9
+
+Custom api response and error handling | chai aur backend
+
+app.j mn ja ky express import kr ky app bnaty hen
+
+async jb bhi complete hota hy to ye 1 promise return krta hy to us ky bad hamm .then or catc handle karen gy 
+
+is ky bad request.params and request.body and request.cookies
+npm js py ja ky package install krna hy cookie-parser or corss 
+
+jbb bhi hamm middleware ya configration seetting krni hy to hamm app.use use krty hen 
+
+is ky bad best and security pratice use krni hen data be sy bht sari form mn aata hy koi body mn bejhy ga koi json mn bejhy ga koi data mn to ham limit lagaeeyy gy 
+
+1 OR USE KRNA HY MULTER IS SEEY HAMM FILE uploading configer krty hen ye 3rd part package hy 
+is ky bad static configer karen gy agr ham ny kuxh file access dena caheey to jessey img or fav icon etc
+is ky bad cookie-parser is ka kaam hy ye ky merey dserver sey user ky browser ko access kr paoon or us ko use kr sakoo is ko srf serf hi use krta hy 
+
+is ky bad url ki configration karen gy 
+
+
+is ky bad middlewear pr jaeen gy 
+
+middle
+
+req.get
+agr ham koi url hit karen gy like instagram 
+req,resres.send("kashif)
+agr ham chk krna caheey ky agr koi url ko access krta hy to hamm chk krna cahtt y hen ky user login hy ya ni is ko middle wear krty hen 
+app admin ho ya ni 
+
+yaha 4 element hoty (err,req,res,next)
+next 1 flag hy ky jab ye wala bnda apna kaam kr ley ga to next kr do
+
+abb utils mn ja ky 1 file bnaeen gy asyncHandler ye 1 method bnaeey ga or us ko export kr dey ga 
+
+higher order function wo function jo function ko as a parameter bhi accept krty hen  ya or us ko return kr dety hen
+
+api ka error or response ko bhi standaries kr den gy
+seratch krna hy node js api error 
+
+assignment this.data field mn kia hota hy 
+ApiResponse.js ki 1 or file bnaeen gy 
+
+api server ky status code hoty hen ye jo status code hen na agr is ky ander informationals cod ehen na wo 100-199
+successfull response 200 -299
+is trqah ky ye error code or resppose code hoty hen jo ky set hen ya krny hoty henn
+
+is ky bad haam middlewears bnaeen gy
+
+
