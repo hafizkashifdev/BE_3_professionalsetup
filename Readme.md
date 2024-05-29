@@ -187,3 +187,18 @@ ham model bnaeen gy or us ky bad 1 package usee karen gy jo ky agreagation query
 jwt 1 bareer token hy mean jo us ko data bejhta hy ye us ko data bejh data hy 
 
 
+lac 11
+
+file upload 
+
+3rd part yservices
+aws pr upload kr do
+
+file uload ko seerate utility function ya middlewear bnaia jaeey ye har jaga kaam aata hy is ley hamm isey as a middlewear inject kr dety hen 
+common services cloudinary
+
+multer or expreess file uload same hen 
+hame multer karen gy 
+cloudinary.js file bnani hy 
+
+
