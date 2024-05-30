@@ -23,3 +23,5 @@ else{
 
     }
 }
+
+export default APiError

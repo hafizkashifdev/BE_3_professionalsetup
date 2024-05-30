@@ -201,4 +201,9 @@ multer or expreess file uload same hen
 hame multer karen gy 
 cloudinary.js file bnani hy 
 
+LAC 14# 
+
+Logic building | Register controller
+
+
 
