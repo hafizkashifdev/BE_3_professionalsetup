@@ -57,7 +57,7 @@ unique: true,
     timestamps: true,
   }
 );
-// jbb pre ky ander call back likho to simple na likhna q ky  is ky andar this ka reference ni hota  i s ley function async function sey likhhy gy
+// jbb pre ky ander call back likho to simple na likhna q ky  is ky andar this ka reference ni hota  is ley function async function sey likhhy gy
 // to is sey ye msla ho ga jb bhi koi chz save ho gi to ye again encrypt pass incrypt kareyy ga to hamm special code likhy gy if condition chk karen gy pass modified hy to save and encrypt kro otherwise ni
 // bcrypt behind the seen bht sarey kaam krty hen to ham method bnaeen gy jis mn hamm user seyt pocheen gy pass save hy ya ni hy so ham ney custom method bnaeen gy
 
@@ -76,7 +76,7 @@ userSchema.method.isPasswordCorrect = async function (password) {
 
 // userSchema.method.generateAccessToken= funcion(){}
 
-// jwt ky pass 1 sign method hota hy jo ky token genrate kr deta hy is ko payload den 1 _id, jo kymongodb sy mill jaeey gi or email sy email mill jaeey gi and this.username sy username ley len gy isis trah full name
+// jwt ky pass 1 sign method hota hy jo ky token genrate kr deta hy is ko payload den 1 _id, jo ky mongodb sy mill jaeey gi or email sy email mill jaeey gi and this.username sy username ley len gy isis trah full name
 userSchema.method.generateAccessToken = function () {
 
     // payload
