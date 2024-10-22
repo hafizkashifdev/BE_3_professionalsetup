@@ -1,9 +1,9 @@
 import express from "express"
 import cors from "cors"
 import cookieParser from "cookie-parser";
-
+import dotenv from 'dotenv'
 const app= express();
-
+dotenv.config()
 app.use(cors({
     origin:process.env.CORS_ORIGIN,
     credentials:true
@@ -19,7 +19,9 @@ app.use(cookieParser())
 import userRouter from "./routes/user.routes.js"
 
 // routes declaration
-app.get
-app.use("/api/v1/users",userRouter)
 
+app.use("/api/v1/users",userRouter)
+app.listen(process.env.RUN_PORT,()=>{
+    console.log(`server is running on port ${process.env.RUN_PORT}`)
+})
 export default app

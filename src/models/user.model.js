@@ -32,6 +32,14 @@ const userSchema = new Schema(
     coverImage: {
       type: String,
     },
+    userNumber: {
+      type: Number, // New field for auto-incremented user number
+      unique: true,
+    },
+   userConcat: {
+type:String,
+unique: true,
+    },
     watchHistory: {
       type: Schema.Types.ObjectId,
       ref: "video",
@@ -43,6 +51,7 @@ const userSchema = new Schema(
     refreshToke: {
       type: String,
     },
+    
   },
   {
     timestamps: true,

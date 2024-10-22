@@ -5,7 +5,7 @@ professional setup
 
 create public folder create temp file create .gitkeep
 
-create .git ignore file  go to git ignore genatorator onlin ecopy node js
+create .git ignore file  go to git ignore genatorator online copy node js
 
 create .env file  asal mn envirment variable system sey uthhaeyy jaty hen 
 .env.sampl create ki hy jo .env mn ho ga wo .env.sample men rakhha jaeey ga 
@@ -20,7 +20,7 @@ abb 5 folder create karenn gey
  mkdir sey hamm bna skty hen 
 1- controllers major functionality yaha ho gi
 2- db data base connect kessey krna hy      data base ka connection logic yaha likha jata hy 
-3- middlewears koi jo code app ko inbetween run krana hy app kyopaass 1 request aii is pehley ky u ko server fullfill karey us sey pehley hi darmian mn men kuxh chicking lagana cahtaa hn to wo hamm middlewears ky andar krty hen suppose  1 request aii to men darmeian mn 1 middlewears laga db ga app ki cockies mujhy do takey mn pta krn ky app us information ko leney key ley authrized ho ya ni ho 
+3- middlewears koi jo code app ko in between run krana hy app kyopaass 1 request aii is pehley ky u ko server fullfill karey us sey pehley hi darmian mn men kuxh chicking lagana cahtaa hn to wo hamm middlewears ky andar krty hen suppose  1 request aii to men darmeian mn 1 middlewears laga db ga app ki cockies mujhy do takey mn pta krn ky app us information ko leney key ley authrized ho ya ni ho 
 4- models 
 5- routes 
 6- utills ye shortcut hy utilities ka jbb ham kaam karen gy to hameen bht sari utility lageey gy like file upload mailing and token lena etc jbb bhi kisi ko cahhey ho gi wo idghr sey ley ley ga 
@@ -205,5 +205,35 @@ LAC 14#
 
 Logic building | Register controller
 
+// get user details from frontend
+// validation
+// check if user already exist
+// check for images 
+// check for avator
+// uploaad them to cloudinary
+// create user object 
+// create db call
+// remove password and refresh token field from response
+// check for user creation
+// return response
+
+// hamen req.body sey sari details mill jati hen but some time url sey bhi details a rahi hot i hy but is wqt ky ley ham req.body ko destructre krty hen
+// array pr ham map bhi laga sakty hen but ham some bhi laga sakta hy ye true false return krta hy 1 call back reyturn 
+// kr den gy  agr trim krny ky bad bhi empty ho to ye true return krey ga
+// map krny sey hame return krna parey ga firh final return etc 
+
+
+// check if user already exist is ky ley sab sey pehley model sey user model.js sey user ko import karen gy ye user data base sey direct contact krta ye mongo db ko call karey ga
+// abb hamrey pass user hy aur hameen data base sey pochna hy ky hmaeey findone sey pehla user find karen gy
+// $or: operator hamm username ya email ya koi bhi value jo hame chk krni hy wo array ky ander dall den gy 
+// is ky bad upload krna hy agr ham koi chz ko upload krwan ho to await likhty hen jb upload ho jaeyy 1 reference do takey hamm is ko store krwa saken 
+// agr user succefully create ho gia to mogo db kuhd hi _is har user ky sath 1 field add kr deta hy
+// to ham _id sey us ko find karty hen agr user ho ga to mill jaeyy ga 
+// to ham .select pass kr ky wo likhty hen jo ham ko ni caheey 
+
+
+Lac 15 
+
+post man sey dekhna hy abb 
 
 
