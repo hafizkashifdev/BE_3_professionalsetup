@@ -237,3 +237,31 @@ Lac 15
 post man sey dekhna hy abb 
 
 
+lac 16
+
+access token and refresh token 
+access token short term hoty and refresh token long term hotey hen 
+concept ye hy ky jab tak accec token hy us wqt tak access kr sakt hio system mn other wise dobara login krna parta 
+
+and refresh token hy agr 1 dafa login ho gia to cockiee mn save ho jata hy ansd next time 1 refres sey coco 
+
+LAC 17 START 
+
+
+
+
+
+ENV 
+
+PORT=8000
+RUN_PORT=4000
+MONGODB_URI="mongodb+srv://kashifnazim:Hafiz786@cluster0kashif.ttyd33m.mongodb.net"
+CORS_ORIGIN=*
+ACCESS_TOKEN_SECRET=chai-aur-code
+ACCESS_TOKEN_EXPIRY=1d
+REFRESH_TOKEN_SECRET=chai-aur-backend
+REFRESH_TOKEN_EXPIRY=10d
+DB_NAME="backendtube"
+CLOUDINARY_CLOUD_NAME=doccplnqm
+CLOUDINARY_API_KEY=848937315795615
+CLOUDINARY_API_SECRET=4ryJ0PyLNa2b2Lqk8sDl8fQpqC8

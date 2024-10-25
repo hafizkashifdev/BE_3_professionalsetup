@@ -95,7 +95,10 @@ process.env.ACCESS_TOKEN_SECRET,{
 }
 )
 
-};
+};     
+
+
+
 userSchema.method.generateRefreshToken = function () {
 
 
