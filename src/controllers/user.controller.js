@@ -185,7 +185,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
   // access token ko send krna chahiye
 const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
 
-if (incomingRefreshToken) {
+if (!incomingRefreshToken) {
   throw new ApiError(401, "Refresh token is required");}
 try {
     const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET);
