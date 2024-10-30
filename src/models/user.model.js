@@ -105,9 +105,9 @@ userSchema.method.generateRefreshToken = function () {
     // payload
     return jwt.sign({
         _id:this._id,
-        email:this.email,
-        userName:this.userName,
-        fullName:this.fullName,
+        // email:this.email,
+        // userName:this.userName,
+        // fullName:this.fullName,
     
     },
     
@@ -120,4 +120,5 @@ userSchema.method.generateRefreshToken = function () {
 
 };
 
-export  const User = mongoose.model("User", userSchema);
+ const User = mongoose.model("user", userSchema);
+export default User

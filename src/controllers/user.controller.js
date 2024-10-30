@@ -2,7 +2,8 @@ import { asyncHandler } from "../utils/asyncHandler.js";
 import ApiError from "../utils/ApiError.js";
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
 import { ApiResponse } from "../utils/ApiResponse.js";
-import { User } from "../models/user.model.js";
+import  User  from "../models/user.model.js";
+import jwt from "jsonwebtoken";
 
 const registerUser = asyncHandler(async (req, res, next) => {
   // get user details from frontend
@@ -46,10 +47,17 @@ const registerUser = asyncHandler(async (req, res, next) => {
 
   const avatarLocalPath = req.files?.avatar?.[0]?.path;
   const coverImageLocalPath = req.files?.coverImage?.[0]?.path;
+
   console.log(avatarLocalPath);
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar is required");
   }
+
+  console.log(req.files); // This will show you the structure of the uploaded files.
+if (!req.files || !req.files.avatar || req.files.avatar.length === 0) {
+    throw new ApiError(400, "Avatar is required");
+}
+
 
   // is ky bad upload krna hy agr ham koi chz ko upload krwan ho to await likhty hen jb upload ho jaeyy 1 reference do takey hamm is ko store krwa saken 
 
@@ -79,7 +87,7 @@ const registerUser = asyncHandler(async (req, res, next) => {
   // Create user with the URLs from Cloudinary
   const user = await User.create({
     fullName,
-    avatar: avatarUploadResult.url,  // Ensure this property is correctly named
+    avatar: avatarUploadResult.url,  
     coverImage: coverImageUploadResult?.url || "",
     email,
     password,
@@ -169,4 +177,40 @@ const logoutUser = asyncHandler(async (req, res) => {
   res.status(200).json(new ApiResponse(200, null, "User logged out successfully"));
 });
 
-export { registerUser, logoutUser, loginUser };
+const refreshAccessToken = asyncHandler(async (req, res) => {
+  // hameny refresh token chahiye
+  // refresh token ko verify krna chahiye
+  // user ko find krna chahiye
+  // access token generate krna chahiye
+  // access token ko send krna chahiye
+const incomingRefreshToken = req.cookies.refreshToken || req.body.refreshToken;
+
+if (incomingRefreshToken) {
+  throw new ApiError(401, "Refresh token is required");}
+try {
+    const decodedToken = jwt.verify(incomingRefreshToken, process.env.REFRESH_TOKEN_SECRET);
+  
+    const user= await user.findById(decodedToken?._id);
+    if(!user){
+      throw new ApiError(401, "invaild refresh token");
+    }
+  
+    
+    if(user?.refreshToken !== incomingRefreshToken){
+      throw new ApiError(401, "refresh token is expired");
+    }
+  const options={
+    httpOnly:true,
+    secure:true,
+    // sameSite:"none"
+  };
+    const {accessToken, newrefreshToken}= await generateAccessAndRefreshToken(user._id);
+    res.status(200).res.cookie("accessToken", accessToken, options).cookie("refreshToken", newrefreshToken, options).json(new ApiResponse(200, {accessToken, newrefreshToken}, "Access token refreshed successfully"));
+} catch (error) {
+  throw new ApiError(401, "Invalid refresh token",error?.message);
+  
+}
+});
+
+
+export { registerUser, logoutUser, loginUser ,refreshAccessToken};
