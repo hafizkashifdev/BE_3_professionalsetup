@@ -220,13 +220,16 @@ if(!isPasswordValid){
   throw new ApiError(401, "Invalid password");  }
   user.password = newPassword;  await user.save({validateBeforeSave:false});
 
-  return res.status(200).json({message:"Password changed successfully"});
+  return res.status(200)
+  .json(new ApiResponse(2 , 
+    // {password: newPassword}
+ {}   , "Password changed successfully" ));
 });
 
 
 const getCurrentUser=asyncHandler(async(req,res)=>{
   return res.status(200)
-  .json(200,req.user,"User found successfully");
+  .json(new ApiResponse(200,req.user,"User details fetched successfully  "));
  });
   
 
