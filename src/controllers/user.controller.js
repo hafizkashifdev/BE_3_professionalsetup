@@ -212,5 +212,89 @@ try {
 }
 });
 
+const changeCurrentPassword =asyncHandler(async(req,res) => {
+  const {oldPassword, newPassword} = req.body;
+const user = await user.findById(req?.user?.id)
+const isPasswordValid = await user.isPasswordCorrect(oldPassword);
+if(!isPasswordValid){
+  throw new ApiError(401, "Invalid password");  }
+  user.password = newPassword;  await user.save({validateBeforeSave:false});
 
-export { registerUser, logoutUser, loginUser ,refreshAccessToken};
+  return res.status(200).json({message:"Password changed successfully"});
+});
+
+
+const getCurrentUser=asyncHandler(async(req,res)=>{
+  return res.status(200)
+  .json(200,req.user,"User found successfully");
+ });
+  
+
+const updateAcountdetails=asyncHandler(async(req,res)=>{
+const {fullName,email} = req.body;
+if(!fullName || !email){
+  throw new ApiError(400,"All fields are required");}
+  const user= User.findByIdAndUpdate
+  (req.user._id,{$set:{fullName,email:email}},{new:true}).select("-password ");
+
+  return res
+  .status(200)
+  .json(new ApiResponse(200,updatedUser,"User updated successfully  "));
+
+
+});  
+
+// file kesse update krty hen
+// first py multer 
+// second 
+
+const updateUserAvatar=asyncHandler(async(req,res)=>{
+
+const avatarLocalPath= req.file?.path;
+
+if(!avatarLocalPath){
+  throw new ApiError(400,"Avatar is required"); }     
+
+  const avatar= await uploadOnCloudinary(avatarLocalPath);
+
+  if(!avatar.url){        
+    throw new ApiError(500,"Failed to upload avatar"); }
+    
+  const user= await User.findByIdAndUpdate
+  (req.user._id
+    ,{$set:{avatar:avatar.url}}
+    ,{new:true}).
+    select("-password");    
+    
+    return res
+    .status(200)
+    .json(new ApiResponse(200,user,"Avatar image updated successfully  "));  
+
+});
+
+const updateUserCoverImage=asyncHandler(async(req,res)=>{
+
+  const coverLocalPath= req.file?.path;
+  
+  if(!coverLocalPath){
+    throw new ApiError(400,"cover file is required"); }     
+  
+    const coverImage= await uploadOnCloudinary(coverLocalPath);
+  
+    if(!coverImage.url){        
+      throw new ApiError(500,"Failed to upload cover image"); }
+      
+    const user= await User.findByIdAndUpdate
+    (req.user._id
+      ,{$set:{coverImage:coverImage.url}}
+      ,{new:true}).
+      select("-password");        
+      return res
+      .status(200)
+      .json(new ApiResponse(200,user,"cover image updated successfully  "));  
+  });
+
+
+export { registerUser, logoutUser, loginUser ,refreshAccessToken,changeCurrentPassword,
+  getCurrentUser,updateAcountdetails,
+  updateUserAvatar,updateUserCoverImage};
