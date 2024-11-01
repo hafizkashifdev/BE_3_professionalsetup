@@ -275,5 +275,14 @@ CLOUDINARY_API_SECRET=4ryJ0PyLNa2b2Lqk8sDl8fQpqC8
 lac 18
 lac 19
 Data Base samjhy gey
+subscription model ko study kia hy aur ham ny ny ye dekha hy ky her subcription pr 1 docoment bnta hy 
+us key acording ham dey sakty hen docoment ko count kr ky user ny jitny
+channelk subcribe key wo bi get kr sakty hen and 1 chaneel pr kitny subcriber hen wo bhi jan sakty hen
+
+lacture 20
+
+is lacture mn ham ny agrigation pipe likhni hy
+
+
 
 

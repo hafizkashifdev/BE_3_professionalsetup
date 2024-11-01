@@ -297,7 +297,76 @@ const updateUserCoverImage=asyncHandler(async(req,res)=>{
       .json(new ApiResponse(200,user,"cover image updated successfully  "));  
   });
 
+  const getUserChannelProfile= asyncHandler(async(req,res)=>{
+const {username}=req.params;
+if(!username?.trim()){
+  throw new ApiError(400,"Username is required");}
+
+const channel= await User.aggregate([
+  {$match:{
+  username:username?.toLowerCase()
+}},{
+  $lookup:{
+    from:"subscriptions",
+    localField:"_id",
+    foreignField:"channel",
+    as:"subscribers"
+  }
+},{
+  $lookup:{
+    from:"subscriptions",
+    localField:"_id",
+    foreignField:"subscriber",
+    as:"subscribedTo"
+  },
+},
+{
+  $addFields:{
+    $subscribersCount:{
+      $size:"$subscribers"
+    },
+    channelSubscribed:{
+      $size:"$subscribedTo"
+    },
+
+    // in kia krta hy?
+    // conditions if, then ,else
+   // if:{ check krta hy agr docoment jo  aia hy us mn men hn ya ni
+   // already 1 operatopr hy in jop ky calculate kr ky dey deta hy 
+   // array aur object dono ky andar
+   // in ka matlab hy present hy ya i hy ye arrays aur sarey object mn sey dehk leta hy }
+    iSubscribed:{
+
+      $cond:{
+        if:{$in:[req.user._id,"$subscribers.subscriber"]},
+        then:true,
+        else:false
+      }
+   
+    }
+  },
+  // projet projection deta hy ky men sari value ko ni krn ga only selected krn ga
+  // us ky ley ham value ka name dey kr us ky agey 1 laga dety hen 
+  $project:{
+    fullName:1,
+    avatar:1,
+    coverImage:1,
+    username:1,
+    subscribersCount:1,
+    channelSubscribed:1,
+    iSubscribed:1,
+    email:1
+  }
+}])
+
+  });
+  if(!channel?.length){
+    throw new ApiError(404,"Channel not found");
+  }
+  return res.status(200)
+  .json
+  (new ApiResponse  (200,channel[0],"Channel profile fetched successfully"));
 
 export { registerUser, logoutUser, loginUser ,refreshAccessToken,changeCurrentPassword,
   getCurrentUser,updateAcountdetails,
-  updateUserAvatar,updateUserCoverImage};
+  updateUserAvatar,updateUserCoverImage,getUserChannelProfile};
