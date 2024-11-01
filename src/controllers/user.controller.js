@@ -233,7 +233,7 @@ const getCurrentUser=asyncHandler(async(req,res)=>{
  });
   
 
-const updateAcountdetails=asyncHandler(async(req,res)=>{
+const updateAccountDetails=asyncHandler(async(req,res)=>{
 const {fullName,email} = req.body;
 if(!fullName || !email){
   throw new ApiError(400,"All fields are required");}
@@ -414,5 +414,5 @@ return res.status(200).json(new ApiResponse(200,user[0],"Watch history fetched s
 });
 
 export { registerUser, logoutUser, loginUser ,refreshAccessToken,changeCurrentPassword,
-  getCurrentUser,updateAcountdetails,
+  getCurrentUser,updateAccountDetails,
   updateUserAvatar,updateUserCoverImage,getUserChannelProfile,getWatchHistory};
