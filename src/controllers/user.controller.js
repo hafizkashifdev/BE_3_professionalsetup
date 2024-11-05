@@ -337,81 +337,81 @@ const channel= await User.aggregate([
    // in ka matlab hy present hy ya i hy ye arrays aur sarey object mn sey dehk leta hy }
     iSubscribed:{
 
-      $cond:{
-        if:{$in:[req.user._id,"$subscribers.subscriber"]},
-        then:true,
-        else:false
+      $cond: {
+        if: { $in: [req.user._id, "$subscribers.subscriber"] },
+        then: true,
+        else: false
       }
-   
     }
-  },
+  }
+},
   // projet projection deta hy ky men sari value ko ni krn ga only selected krn ga
   // us ky ley ham value ka name dey kr us ky agey 1 laga dety hen 
-  $project:{
-    fullName:1,
-    avatar:1,
-    coverImage:1,
-    username:1,
-    subscribersCount:1,
-    channelSubscribed:1,
-    iSubscribed:1,
-    email:1
-  }
-}])
-
-  });
-  if(!channel?.length){
-    throw new ApiError(404,"Channel not found");
-  }
-  return res.status(200)
-  .json
-  (new ApiResponse  (200,channel[0],"Channel profile fetched successfully"));
-
-const getWatchHistory = asyncHandler(async(req,res)=>{ 
-const user =  await User.aggregate([ 
   {
-    $match: {
-       _id: new mongoose.Types.ObjectId(req.user._id)
+    $project: {
+      fullName: 1,
+      avatar: 1,
+      coverImage: 1,
+      username: 1,
+      subscribersCount: 1,
+      channelSubscribed: 1,
+      iSubscribed: 1,
+      email: 1
     }
-  },
-  {
-    $lookup: {
-      from: "videos",
-      localField: "watchHistory",
-      foreignField: "_id",
-      as: "watchedVideosHistory",
-      pipeline:[
-        {
-          $lookup:{
-            from:"users",
-            localField:"owner",
-            foreignField:"_id",
-            as:"owner",
-            pipeline:[  {
-              $project: {
-                fullName: 1,
-                avatar: 1,
-                username: 1
+  }
+]);
+
+if (!channel?.length) {
+  throw new ApiError(404, "Channel not found");
+}
+return res.status(200).json(new ApiResponse(200, channel[0], "Channel profile fetched successfully"));
+});
+
+  const getWatchHistory = asyncHandler(async (req, res) => {
+    const user = await User.aggregate([
+      {
+        $match: {
+          _id: new mongoose.Types.ObjectId(req.user._id)
+        }
+      },
+      {
+        $lookup: {
+          from: "videos",
+          localField: "watchHistory",
+          foreignField: "_id",
+          as: "watchedVideosHistory",
+          pipeline: [
+            {
+              $lookup: {
+                from: "users",
+                localField: "owner",
+                foreignField: "_id",
+                as: "owner",
+                pipeline: [
+                  {
+                    $project: {
+                      fullName: 1,
+                      avatar: 1,
+                      username: 1
+                    }
+                  }
+                ]
               }
-            }]
+            }
+          ]
+        }
+      },
+      {
+        $addFields: {
+          owner: {
+            $first: "$owner"
           }
         }
-      ]
-    }
-  },
-  {
-
-    $addFields:{
-      owner:{
-        $first:"$owner"
       }
-    }
-  }
+    ]);
   
-  
-]);
-return res.status(200).json(new ApiResponse(200,user[0],"Watch history fetched successfully"));
-});
+    return res.status(200).json(new ApiResponse(200, user[0], "Watch history fetched successfully"));
+  });
 
 export { registerUser, logoutUser, loginUser ,refreshAccessToken,changeCurrentPassword,
   getCurrentUser,updateAccountDetails,

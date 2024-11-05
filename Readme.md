@@ -282,6 +282,16 @@ channelk subcribe key wo bi get kr sakty hen and 1 chaneel pr kitny subcriber he
 lacture 20
 
 is lacture mn ham ny agrigation pipe likhni hy
+lacture 21
+
+is mn ham ny controler watcgh history and route ko cover kia hy
+
+lacture 22
+
+Summary of our Backend Series
+
+
+
 
 
 
