@@ -134,22 +134,24 @@ const loginUser = asyncHandler(async (req, res, next) => {
   // generate token access and refresh token 
   // return token send cookie
   // res.json({token})
-
   const { email, username, password } = req.body;
 
-  if (!username || !email) {
-    throw new ApiError(400, "Please provide email and username");
+  if (!email || !username || !password) {
+    throw new ApiError(400, "Please provide email, username, and password");
   }
-
+ 
   // or mongo db ka operator hy jis mn ham array ky ander object pass kkr dety hen
   const user = await User.findOne({ $or: [{ email }, { username }] });
   if (!user) {
     throw new ApiError(404, "User does not exist");
   }
+
   const isPasswordValid = await user.isPasswordCorrect(password);
   if (!isPasswordValid) {
     throw new ApiError(401, "Invalid credentials");
   }
+  
+
   const { accessToken, refreshToken } = await generateAccessAndRefreshToken(user._id);
   const loggedInUser = await User.findById(user._id).select("-password -refreshToken");
 
@@ -158,19 +160,23 @@ const loginUser = asyncHandler(async (req, res, next) => {
     httpOnly: true,
     secure: true,
   };
-  return res.status(200).cookie("accessToken", accessToken, options).cookie("refreshToken", refreshToken, options).json(new ApiResponse(200, { accessToken, loggedInUser, refreshToken }, "User logged in successfully"));
+
+  return res.status(200)
+  .cookie("accessToken", accessToken, options)
+  .cookie("refreshToken", refreshToken, options)
+  .json(new ApiResponse(200, { accessToken, loggedInUser, refreshToken }, "User logged in successfully"));
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
   // middleware janey sey pehley mill ky jaeey ga
   // multer form a data to ja raha image ko bhi letyy jaoo
   // ham kuhd ka middle ware design krty hen 
-  await User.findOneAndUpdate({ _id: req.user._id }, { refreshToken: "" }, { new: true });
+  await User.findOneAndUpdate(req.user._id , { $unset:{refreshToken: 1 }}, { new: true });
 
   const options = {
     httpOnly: true,
     secure: true,
-    sameSite: "none",
+    // sameSite: "none",
   };
   res.clearCookie("accessToken", options);
   res.clearCookie("refreshToken", options);

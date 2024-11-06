@@ -68,57 +68,37 @@ userSchema.pre("save", async function (next) {
 });
 //  custom method ky ley user schema lena parta  hy is ky andar 1 method hota hy jis ka name hy method or ham apni marzi ky methosd add r sakty hen
 
-userSchema.method.isPasswordCorrect = async function (password) {
+userSchema.methods.isPasswordCorrect = async function (password) {
   return await bcrypt.compare(password, this.password);
 };
+
 
 // ham access token ko genrate krny ky ley 1 or method likhy gey isi trah sey hi refresh token
 
 // userSchema.method.generateAccessToken= funcion(){}
 
 // jwt ky pass 1 sign method hota hy jo ky token genrate kr deta hy is ko payload den 1 _id, jo ky mongodb sy mill jaeey gi or email sy email mill jaeey gi and this.username sy username ley len gy isis trah full name
-userSchema.method.generateAccessToken = function () {
-
-    // payload
-return jwt.sign({
-    _id:this._id,
-    email:this.email,
-    userName:this.userName,
-    fullName:this.fullName,
-
-},
-
-//  acesstoken 
-
-process.env.ACCESS_TOKEN_SECRET,{
-    expiresIn:process.env.ACCESS_TOKEN_EXPIRY
-}
-)
-
-};     
-
-
-
-userSchema.method.generateRefreshToken = function () {
-
-
-    // payload
-    return jwt.sign({
-        _id:this._id,
-        // email:this.email,
-        // userName:this.userName,
-        // fullName:this.fullName,
-    
-    },
-    
-    //  acesstoken 
-    
-    process.env.REFRESH_TOKEN_SECRET,{
-        expiresIn:process.env.REFRESH_TOKEN_EXPIRY
-    }
-    )
-
+userSchema.methods.generateAccessToken = function () {
+  return jwt.sign({
+      _id: this._id,
+      email: this.email,
+      userName: this.userName,
+      fullName: this.fullName,
+  },
+  process.env.ACCESS_TOKEN_SECRET, {
+      expiresIn: process.env.ACCESS_TOKEN_EXPIRY
+  });
 };
+
+userSchema.methods.generateRefreshToken = function () {
+  return jwt.sign({
+      _id: this._id,
+  },
+  process.env.REFRESH_TOKEN_SECRET, {
+      expiresIn: process.env.REFRESH_TOKEN_EXPIRY
+  });
+};
+
 
  const User = mongoose.model("user", userSchema);
 export default User
